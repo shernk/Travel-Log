@@ -1,8 +1,4 @@
-/* eslint-disable linebreak-style */
-/* eslint-disable quotes */
-/* eslint-disable semi */
-/* eslint-disable no-console */
-/* eslint-disable comma-dangle */
+/* eslint-disable */
 
 const express = require('express');
 const morgan = require('morgan');
@@ -19,6 +15,7 @@ const app = express();
 
 mongoose.connect(process.env.DATABASE_URL, {
   useNewUrlParser: true,
+  useUnifiedTopology: true,
 });
 
 // middle wares
@@ -27,6 +24,7 @@ app.use(helmet());
 app.use(cors({
   origin: process.env.CORS_ORIGIN,
 }));
+app.use(express.json());
 
 app.get('/', (req, res) => {
   res.json({
@@ -35,6 +33,7 @@ app.get('/', (req, res) => {
 })
 
 app.use('/api/routes', routes);
+
 // Got error and
 // identifined not found what the request was
 app.use(middlewares.NotFound)
