@@ -13,6 +13,7 @@ const mongoose = require('mongoose');
 require('dotenv').config();
 
 const middlewares = require('./middlewares');
+const routes = require('../api/routes');
 
 const app = express();
 
@@ -33,6 +34,7 @@ app.get('/', (req, res) => {
   })
 })
 
+app.use('/api/routes', routes);
 // Got error and
 // identifined not found what the request was
 app.use(middlewares.NotFound)
