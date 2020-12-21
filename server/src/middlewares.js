@@ -1,10 +1,4 @@
-/* eslint-disable linebreak-style */
-/* eslint-disable eol-last */
-/* eslint-disable quotes */
-/* eslint-disable no-unused-vars */
-/* eslint-disable semi */
-/* eslint-disable no-console */
-/* eslint-disable comma-dangle */
+/* eslint-disable */
 
 const NotFound = (req, res, next) => {
   const error = new Error(`Not Found - ${req.originalUrl}`);

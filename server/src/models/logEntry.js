@@ -1,7 +1,4 @@
-/* eslint-disable linebreak-style */
-/* eslint-disable quotes */
-/* eslint-disable no-unused-vars */
-/* eslint-disable import/no-extraneous-dependencies */
+/* eslint-disable */
 
 const mongoose = require("mongoose");
 
