@@ -18,6 +18,15 @@ mongoose.connect(process.env.DATABASE_URL, {
   useUnifiedTopology: true,
 });
 
+const connection = mongoose.connection;
+connection.once("open", () => {
+  console.log("MongoDB database connection established successfully");
+});
+
+// process.on('unhandledRejection', (reason, promise) => {
+//   console.log('Unhandled Rejection at:', promise, 'reason:', reason);
+// });
+
 // middle wares
 app.use(morgan('common'));
 app.use(helmet());
