@@ -50,7 +50,7 @@ app.use(middlewares.NotFound)
 // Showed specific an error
 app.use(middlewares.ErrorHandler);
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3003;
 
 app.listen(port, () => {
   console.log(`Listening at http://localhost:${port}`);
