@@ -31,7 +31,7 @@ router.post('/', async (req, res, next) => {
 
 router.delete('/:id', async(req, res, next) => {
   try {
-    const deletedItem = await LogEntry.findByIdAndDelete(req.params.id);
+    await LogEntry.findByIdAndDelete(req.params.id);
     const logEntry = new LogEntry(req.body);
     res.json(logEntry);
   } catch (error) {
