@@ -30,16 +30,20 @@ connection.once("open", () => {
 // middle wares
 app.use(morgan('common'));
 app.use(helmet());
-app.use(cors({
-  origin: process.env.CORS_ORIGIN,
-}));
+app.use(cors({ origin: process.env.CORS_ORIGIN }));
 app.use(express.json());
 
-// app.get('/', (req, res) => {
-//   res.json({
-//     message: 'Hello World!'
-//   })
-// })
+// Use middleware to set the default Content-Type
+app.use(function (req, res, next) {
+  res.header('Content-Type', 'application/json');
+  next();
+});
+
+app.get('/', (req, res) => {
+  res.json({
+    message: 'Hello World!'
+  })
+})
 
 app.use('/api/routes', routes);
 
