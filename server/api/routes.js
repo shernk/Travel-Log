@@ -39,4 +39,14 @@ router.delete('/:id', async(req, res, next) => {
   }
 })
 
+router.put("/:id", async (req, res, next) => {
+  try {
+    const updatedEntry = 
+    await LogEntry.findByIdAndUpdate(req.params.id, req.body, {new: true})
+    res.json(updatedEntry);
+  } catch (error) {
+    next(error);
+  }
+});
+
 module.exports = router;
