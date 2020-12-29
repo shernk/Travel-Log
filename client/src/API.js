@@ -1,12 +1,12 @@
-const API_URL = "http://localhost:1337";
+// const API_URL = "http://localhost:1337";
 
 export async function listLogEntries() {
-  const response = await fetch(`${API_URL}/api/routes`);
+  const response = await fetch(`${process.env.API_URL}/api/routes`);
   return response.json();
 }
 
 export async function createLogEntry(entry) {
-  const response = await fetch(`${API_URL}/api/routes`, {
+  const response = await fetch(`${process.env.API_URL}/api/routes`, {
     method: "POST",
     headers: {
       "content-type": "application/json",
