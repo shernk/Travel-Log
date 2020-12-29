@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import ReactMapGL, { Marker, Popup } from "react-map-gl";
 import {listLogEntries} from './API';
 import LogEntryForm from './logEntryForm';
+// import { Loader } from "google-maps";
 
 const App = () => {
   const [logEntry, setLogEntries] = useState([]);
@@ -31,6 +32,17 @@ const App = () => {
     });
   };
 
+  // const loader = new Loader({
+  //   apiKey: "AIzaSyAuNHRDRO272mFTfSQeFP7ydADffhIEBbY",
+  //   version: "weekly",
+  // });
+  // loader.load().then((google) => {
+  //   const map = new google.maps.Map(document.getElementById("map"), {
+  //     center: { lat: 47.608013, lng: -122.335167 },
+  //     zoom: 8,
+  //   });
+  // });
+
   return (
     <ReactMapGL
       {...viewport}
@@ -43,6 +55,7 @@ const App = () => {
         <React.Fragment key={entry._id}>
           <Marker latitude={entry.latitude} longitude={entry.longitude}>
             <div
+              className="pin"
               onClick={() =>
                 setShowPopUp({
                   // ...showPopUp,
@@ -52,10 +65,11 @@ const App = () => {
             >
               <img
                 className="marker yellow"
-                src="../public/location-marker.png"
-                alt="marker"
+                src="../../pin-marker.png"
+                alt="MARKER"
               />
             </div>
+            <div id="map" className="map"></div>
           </Marker>
           {showPopUp[entry._id] ? (
             <Popup
@@ -73,7 +87,7 @@ const App = () => {
                 <small>
                   Visited on: {new Date(entry.visitDate).toLocaleDateString()}
                 </small>
-                {entry.image && <img src={entry.image} alt={entry.title}/>}
+                {entry.image && <img src={entry.image} alt={entry.title} />}
               </div>
             </Popup>
           ) : null}

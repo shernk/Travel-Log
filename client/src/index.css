@@ -17,9 +17,15 @@ body {
 .marker.red path, .error {
   fill: #f05305;
 }
+ .pin, map {
+   height: 100%;
+ }
 
-.marker.yellow path {
+.marker.yellow {
   fill: #F3B73E;
+  transform: translate(-50%, -50%);
+  height: 50px;
+  width: 50px;
 }
 
 .popup {
@@ -29,7 +35,7 @@ body {
 
 .popup img {
   height: 200px;
-  width: auto;
+  width: -webkit-fill-available;
   text-align: center;
   margin: 0 auto;
   display: block;
