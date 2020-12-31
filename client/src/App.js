@@ -24,6 +24,7 @@ const App = () => {
   useEffect(() => { getEntries() }, []);
 
   const showAddMarkerPopUp = (event) => {
+    // console.log(event);
     const [longitude, latitude] = event.lngLat;
     setAddEntryLocation({
       longitude,
@@ -46,7 +47,6 @@ const App = () => {
               className="pin"
               onClick={() =>
                 setShowPopUp({
-                  // ...showPopUp,
                   [entry._id]: true,
                 })
               }
@@ -123,11 +123,11 @@ const App = () => {
           >
             <div className="popup">
               <LogEntryForm
+                location={addEntryLocation}
                 onClose={() => {
-                  setAddEntryLocation(null); // after created Entry, hidden the form
+                  setAddEntryLocation(null); // after created entry, hidden the form
                   getEntries(); // next, reload location was marked
                 }}
-                location={addEntryLocation}
               />
             </div>
           </Popup>
