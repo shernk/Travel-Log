@@ -49,3 +49,7 @@ body {
   display: block;
   width: 100%;
 }
+
+.mapboxgl-popup {
+  z-index: 9999;
+}

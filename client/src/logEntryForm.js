@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import {createLogEntry} from './API';
+import { createLogEntry } from "./API";
 
 const LogEntryForm = ({ location, onClose }) => {
   const { register, handleSubmit } = useForm();
@@ -24,11 +24,7 @@ const LogEntryForm = ({ location, onClose }) => {
     <form onSubmit={handleSubmit(onSubmit)} className="entry-form">
       {error ? <h3 className="error">{error}</h3> : null}
       <label htmlFor="title">Title</label>
-      <input
-        name="title"
-        required
-        ref={register}
-      />
+      <input name="title" required ref={register} />
       <label htmlFor="latitude">Latitude</label>
       <input
         name="latitude"

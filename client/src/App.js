@@ -18,6 +18,7 @@ const App = () => {
 
   const getEntries = async () => {
     const logEntries = await listLogEntries();
+    console.log(logEntries);
     setLogEntries(logEntries);
   };
 
@@ -72,6 +73,12 @@ const App = () => {
               <div className="popup">
                 <h3>{entry.title}</h3>
                 <p>{entry.comments}</p>
+                <p htmlFor="latitude">
+                  Latitude: {entry.latitude}
+                </p>
+                <p htmlFor="longitude">
+                  Longitude: {entry.longitude}
+                </p>
                 <small>
                   Visited on: {new Date(entry.visitDate).toLocaleDateString()}
                 </small>
