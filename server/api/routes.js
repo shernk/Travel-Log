@@ -6,7 +6,7 @@ const LogEntry = require('../src/models/logEntry');
 
 const router = Router();
 
-router.get('/', async (req, res) => {
+router.get('/', async (req, res, next) => {
   try {
     const entries = await LogEntry.find();
     res.json(entries);

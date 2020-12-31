@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import ReactMapGL, { Marker, Popup } from "react-map-gl";
 import {listLogEntries} from './API';
 import LogEntryForm from './logEntryForm';
-// import { Loader } from "google-maps";
 
 const App = () => {
   const [logEntry, setLogEntries] = useState([]);
@@ -31,17 +30,6 @@ const App = () => {
       latitude,
     });
   };
-
-  // const loader = new Loader({
-  //   apiKey: "AIzaSyAuNHRDRO272mFTfSQeFP7ydADffhIEBbY",
-  //   version: "weekly",
-  // });
-  // loader.load().then((google) => {
-  //   const map = new google.maps.Map(document.getElementById("map"), {
-  //     center: { lat: 47.608013, lng: -122.335167 },
-  //     zoom: 8,
-  //   });
-  // });
 
   return (
     <ReactMapGL
