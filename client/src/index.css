@@ -17,7 +17,7 @@ body {
 .marker.red path, .error {
   fill: #f05305;
 }
- .pin, map {
+ .pin {
    height: 100%;
  }
 

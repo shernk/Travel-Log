@@ -28,6 +28,7 @@ const LogEntryForm = ({ location, onClose }) => {
       <label htmlFor="latitude">Latitude</label>
       <input
         name="latitude"
+        readOnly
         required
         ref={register}
         value={location.latitude}
@@ -35,6 +36,7 @@ const LogEntryForm = ({ location, onClose }) => {
       <label htmlFor="longitude">Longitude</label>
       <input
         name="longitude"
+        readOnly
         required
         ref={register}
         value={location.longitude}

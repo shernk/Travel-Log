@@ -58,7 +58,6 @@ const App = () => {
                 alt="MARKER"
               />
             </div>
-            <div id="map" className="map"></div>
           </Marker>
           {showPopUp[entry._id] ? (
             <Popup
@@ -73,12 +72,8 @@ const App = () => {
               <div className="popup">
                 <h3>{entry.title}</h3>
                 <p>{entry.comments}</p>
-                <p htmlFor="latitude">
-                  Latitude: {entry.latitude}
-                </p>
-                <p htmlFor="longitude">
-                  Longitude: {entry.longitude}
-                </p>
+                <p htmlFor="latitude">Latitude: {entry.latitude}</p>
+                <p htmlFor="longitude">Longitude: {entry.longitude}</p>
                 <small>
                   Visited on: {new Date(entry.visitDate).toLocaleDateString()}
                 </small>
@@ -140,6 +135,37 @@ const App = () => {
           </Popup>
         </>
       ) : null}
+      
+      <div id="map"></div>
+      <div className="gm-style">
+        <div className="controls zoom-control">
+          <button className="zoom-control-in" title="Zoom In">
+            +
+          </button>
+          <button className="zoom-control-out" title="Zoom Out">
+            −
+          </button>
+        </div>
+        <div className="controls maptype-control maptype-control-is-map">
+          <button className="maptype-control-map" title="Show road map">
+            Map
+          </button>
+          <button
+            className="maptype-control-satellite"
+            title="Show satellite imagery"
+          >
+            Satellite
+          </button>
+        </div>
+        <div className="controls fullscreen-control">
+          <button title="Toggle Fullscreen">
+            <div className="fullscreen-control-icon fullscreen-control-top-left"></div>
+            <div className="fullscreen-control-icon fullscreen-control-top-right"></div>
+            <div className="fullscreen-control-icon fullscreen-control-bottom-left"></div>
+            <div className="fullscreen-control-icon fullscreen-control-bottom-right"></div>
+          </button>
+        </div>
+      </div>
     </ReactMapGL>
   );
 }
