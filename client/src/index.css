@@ -1,7 +1,7 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -14,15 +14,16 @@ body {
   transform: translate(-50%, -100%);
 }
 
-.marker.red path, .error {
+.marker.red path,
+.error {
   fill: #f05305;
 }
- .pin {
-   height: 100%;
- }
+.pin {
+  height: 100%;
+}
 
 .marker.yellow {
-  fill: #F3B73E;
+  fill: #f3b73e;
   height: 50px;
   width: 50px;
 }
@@ -52,4 +53,38 @@ body {
 
 .mapboxgl-popup {
   z-index: 9999;
+}
+
+.zoom-control {
+  width: 30px;
+  margin: 10px;
+}
+
+.geolocateStyle {
+  top: 0;
+  left: 0;
+  padding: "10px";
+  position: 'absolute';
+}
+
+.fullscreenControlStyle {
+  top: 36;
+  left: 0;
+  padding: "10px";
+  position: 'absolute';
+}
+
+.navStyle {
+  top: 72;
+  left: 0;
+  margin-top: 5px;
+  padding: "10px";
+  position: 'absolute';
+}
+
+.scaleControlStyle {
+  bottom: 36;
+  left: 0;
+  padding: "10px";
+  position: 'absolute';
 }

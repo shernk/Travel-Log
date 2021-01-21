@@ -50,18 +50,6 @@
   padding: 0 6px;
 }
 
-.gm-style
-  .controls.maptype-control.maptype-control-is-map
-  .maptype-control-map {
-  font-weight: 700;
-}
-
-.gm-style
-  .controls.maptype-control.maptype-control-is-satellite
-  .maptype-control-satellite {
-  font-weight: 700;
-}
-
 .gm-style .controls.fullscreen-control button {
   display: block;
   font-size: 1em;
