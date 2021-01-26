@@ -1,6 +1,6 @@
   * [ ] Design Pattern to single file
   * [ ] onDragStart is not show
-  * [ ] onDrag & onDragEnd are not async to show
+  * [ ] onDrag & onDragEnd are not async
   * [ ] Delete location
   * [ ] Update location
   * [ ] Hide previous logEntryForm when dragged end
