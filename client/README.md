@@ -1,4 +1,4 @@
-
+  * [ ] Design Pattern to single file
   * [ ] onDragStart is not show
   * [ ] onDrag & onDragEnd are not async to show
   * [ ] Delete location
