@@ -1,6 +1,6 @@
 import logDragEvent from './logDragEvent';
 import ShowAddMarkerPopUp from '../popup/showAddMarkerPopUp'
-import GetEntries from '../enTry/getEntries'
+import GetEntries from '../entry/getEntries'
 
 const onMarkerDragEnd = async (event) => {
   const longitude = event.lngLat[0];

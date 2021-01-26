@@ -66,10 +66,10 @@ const App = () => {
     logDragEvent("onDragEnd", event);
 
     // take the location and show logEntry form
-    setAddEntryLocation({
-      longitude,
-      latitude,
-    });
+    // setAddEntryLocation({
+    //   longitude,
+    //   latitude,
+    // });
 
     return {
       marker: {
@@ -176,7 +176,7 @@ const App = () => {
         </>
       ) : null}
 
-      <ControlPanel names={events} />
+      <ControlPanel lngLats={events} />
 
       <div className="zoom-control">
         <div className="fullscreenControlStyle">

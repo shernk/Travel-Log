@@ -2,12 +2,12 @@ function round5(value) {
   return (Math.round(value * 1e5) / 1e5).toFixed(5);
 }
 
-const ControlPanel = ({names}) => {
+const ControlPanel = ({lngLats}) => {
   const eventNames = ["onDragStart", "onDrag", "onDragEnd"];
 
   const renderEvent = (eventName) => {
-    const name = names;
-    const lngLat = name[eventName];
+    const location = lngLats;
+    const lngLat = location[eventName];
 
     return (
       <div key={eventName}>
