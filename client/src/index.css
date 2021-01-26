@@ -64,14 +64,14 @@ body {
   top: 0;
   left: 0;
   padding: "10px";
-  position: 'absolute';
+  position: "absolute";
 }
 
 .fullscreenControlStyle {
   top: 36;
   left: 0;
   padding: "10px";
-  position: 'absolute';
+  position: "absolute";
 }
 
 .navStyle {
@@ -79,14 +79,14 @@ body {
   left: 0;
   margin-top: 5px;
   padding: "10px";
-  position: 'absolute';
+  position: "absolute";
 }
 
 .scaleControlStyle {
   bottom: 36;
   left: 0;
   padding: "10px";
-  position: 'absolute';
+  position: "absolute";
 }
 
 h3 {
@@ -107,4 +107,20 @@ h3 {
   right: 0;
   outline: none;
   cursor: auto;
+}
+
+.entry-form .button-entry {
+  width: 375px;
+  display: inline-block;
+  padding: 0.3em 1.2em;
+  margin: 0 0.1em 0.1em 0;
+  border: 0.16em solid rgba(255, 255, 255, 0);
+  color: #f05305;
+  box-shadow: cadetblue;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.entry-form .button-entry:hover {
+  border-color: rgba(255, 255, 255, 1);
 }
