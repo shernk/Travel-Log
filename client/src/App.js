@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import ReactMapGL, {
   Marker,
   Popup,
@@ -9,19 +9,15 @@ import ReactMapGL, {
   GeolocateControl,
 } from "react-map-gl";
 import { listLogEntries } from "./API";
-import LogEntryForm from "./logEntryForm";
+import LogEntryForm from "./entry/logEntryForm";
 import ControlPanel from "./marker/control-panel";
 import Pin from "./marker/pin";
-import onMarkerDragStart from './marker/onMarkerDragStart'
-import onMarkerDrag from './marker/onMarkerDrag';
-import onMarkerDragEnd from './marker/onMarkerDragEnd'
-// import ShowAddMarkerPopUp from './popup/showAddMarkerPopUp'
-// import GetEntries from './enTry/getEntries';
 
 const App = () => {
   const [logEntry, setLogEntries] = useState([]);
   const [showPopUp, setShowPopUp] = useState({});
   const [addEntryLocation, setAddEntryLocation] = useState(null);
+  const [events, setLogEvents] = useState({});
   const [viewport, setViewport] = useState({
     width: "100vw",
     height: "100vh",
@@ -30,11 +26,11 @@ const App = () => {
     zoom: 8,
   });
 
-  const [events, setEvents] = useState("");
-
+  // All location've already existed
   const getEntries = async () => {
     const logEntries = await listLogEntries();
     console.log(logEntries);
+
     setLogEntries(logEntries);
   };
 
@@ -42,42 +38,17 @@ const App = () => {
     getEntries();
   }, []);
 
-  function logDragEvent(name, events) {
-    const lngLats = events.lngLat;
+  const onMarkerDragStart = useCallback((event) => {
+    setLogEvents((_event) => ({ ..._event, onDragStart: event.lngLat }));
+  }, []);
 
-    return setEvents({
-      ...lngLats,
-      [name]: lngLats,
-    });
-  };
+  const onMarkerDrag = useCallback((event) => {
+    setLogEvents((_event) =>  ({ ..._event, onDrag: event.lngLat }));
+  }, []);
 
-  const onMarkerDragStart = (event) => {
-    logDragEvent("onDragStart", event);
-  };
-
-  const onMarkerDrag = (event) => {
-    logDragEvent("onDrag", event);
-  };
-
-  const onMarkerDragEnd = async (event) => {
-    const longitude = event.lngLat[0];
-    const latitude = event.lngLat[1];
-
-    logDragEvent("onDragEnd", event);
-
-    // take the location and show logEntry form
-    // setAddEntryLocation({
-    //   longitude,
-    //   latitude,
-    // });
-
-    return {
-      marker: {
-        longitude,
-        latitude,
-      },
-    };
-  };
+  const onMarkerDragEnd = useCallback((event) => {
+    setLogEvents((_event) => ({ ..._event, onDragEnd: event.lngLat }));
+  }, []);
 
   const showAddMarkerPopUp = (event) => {
     // console.log(event);
@@ -119,6 +90,7 @@ const App = () => {
               <Pin />
             </div>
           </Marker>
+          
           {showPopUp[entry._id] ? (
             <Popup
               latitude={entry.latitude}
