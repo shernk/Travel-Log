@@ -8,7 +8,7 @@ import ReactMapGL, {
   ScaleControl,
   GeolocateControl,
 } from "react-map-gl";
-import { listLogEntries } from "./API";
+import { listLogEntries } from "./fetch/API";
 import LogEntryForm from "./entry/logEntryForm";
 import ControlPanel from "./marker/control-panel";
 import Pin from "./marker/pin";
@@ -29,35 +29,62 @@ const App = () => {
   // All location've already existed
   const getEntries = async () => {
     const logEntries = await listLogEntries();
-    console.log(logEntries);
+    // console.log(logEntries);
 
     setLogEntries(logEntries);
   };
 
-  useEffect(() => {
-    getEntries();
-  }, []);
-
+  // render to show all location was marked
+  useEffect(() => { getEntries() },[]);
+  
   const onMarkerDragStart = useCallback((event) => {
     setLogEvents((_event) => ({ ..._event, onDragStart: event.lngLat }));
   }, []);
-
+  
   const onMarkerDrag = useCallback((event) => {
     setLogEvents((_event) =>  ({ ..._event, onDrag: event.lngLat }));
   }, []);
-
+  
   const onMarkerDragEnd = useCallback((event) => {
+    console.log("onDragEnd");
     setLogEvents((_event) => ({ ..._event, onDragEnd: event.lngLat }));
+    
+    // show logEntry form to create new marker
+    showAddMarkerPopUp(event);
+
+    // delete marker was dragging
+    deleteMarker();
+
+    // reload all marker
+    getEntries();
   }, []);
 
   const showAddMarkerPopUp = (event) => {
-    // console.log(event);
     const [longitude, latitude] = event.lngLat;
     setAddEntryLocation({
       longitude,
       latitude,
     });
   };
+  
+  const deleteMarker = async () => {
+    console.log("deleteMarker");  
+    const logEntries = await listLogEntries();
+
+    // list of all markers
+    const id = logEntries.map(entry => (entry._id))
+    // console.log(id);
+    
+    // delete marker by id
+    logEntries.splice(logEntries.findIndex((entry) => {return entry._id === id}), 1);
+    // console.log(logEntries);
+    
+    // save in listLogEntries
+  // const newLogEntry = new createLogEntry(logEntries);
+  // console.log(newLogEntry);
+  
+    return logEntries;
+  }
 
   return (
     <ReactMapGL
@@ -81,16 +108,12 @@ const App = () => {
           >
             <div
               className="pin"
-              onClick={() =>
-                setShowPopUp({
-                  [entry._id]: true,
-                })
-              }
+              onClick={() => setShowPopUp({ [entry._id]: true })}
             >
               <Pin />
             </div>
           </Marker>
-          
+
           {showPopUp[entry._id] ? (
             <Popup
               latitude={entry.latitude}
