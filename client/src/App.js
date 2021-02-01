@@ -6,10 +6,9 @@ import ReactMapGL, {
   NavigationControl,
   FullscreenControl,
   ScaleControl,
-  GeolocateControl,
 } from "react-map-gl";
 import { listLogEntries } from "./fetch/API";
-import LogEntryForm from "./entry/logEntryForm";
+import LogEntryForm from "./enTry/logEntryForm";
 import ControlPanel from "./marker/control-panel";
 import Pin from "./marker/pin";
 
@@ -29,7 +28,7 @@ const App = () => {
   // All location've already existed
   const getEntries = async () => {
     const logEntries = await listLogEntries();
-    // console.log(logEntries);
+    console.log(logEntries);
 
     setLogEntries(logEntries);
   };
@@ -45,19 +44,19 @@ const App = () => {
     setLogEvents((_event) =>  ({ ..._event, onDrag: event.lngLat }));
   }, []);
   
-  const onMarkerDragEnd = useCallback((event) => {
-    console.log("onDragEnd");
-    setLogEvents((_event) => ({ ..._event, onDragEnd: event.lngLat }));
-    
-    // show logEntry form to create new marker
-    showAddMarkerPopUp(event);
+  const onMarkerDragEnd = useCallback(
+    (event) => {
+      console.log("onDragEnd");
+      setLogEvents((_event) => ({ ..._event, onDragEnd: event.lngLat }));
 
-    // delete marker was dragging
-    deleteMarker();
+      // show logEntry form to create new marker
+      showAddMarkerPopUp(event);
 
-    // reload all marker
-    getEntries();
-  }, []);
+      // delete marker was dragging
+      deleteMarker();
+    },
+    []
+  );
 
   const showAddMarkerPopUp = (event) => {
     const [longitude, latitude] = event.lngLat;
@@ -68,21 +67,27 @@ const App = () => {
   };
   
   const deleteMarker = async () => {
-    console.log("deleteMarker");  
+    console.log("deleteMarker");
     const logEntries = await listLogEntries();
 
     // list of all markers
-    const id = logEntries.map(entry => (entry._id))
+    const id = logEntries.map((entry) => entry._id);
     // console.log(id);
-    
+
     // delete marker by id
-    logEntries.splice(logEntries.findIndex((entry) => {return entry._id === id}), 1);
-    // console.log(logEntries);
-    
+    logEntries.splice(
+      logEntries.findIndex((entry) => {
+        return entry._id === id;
+      }),
+      1
+    );
+    console.log(logEntries);
+
+    // reload all marker
+    getEntries();
+
     // save in listLogEntries
-  // const newLogEntry = new createLogEntry(logEntries);
-  // console.log(newLogEntry);
-  
+
     return logEntries;
   }
 
@@ -182,9 +187,6 @@ const App = () => {
         </div>
         <div className="scaleControlStyle">
           <ScaleControl />
-        </div>
-        <div className="geolocateStyle">
-          <GeolocateControl />
         </div>
       </div>
     </ReactMapGL>
