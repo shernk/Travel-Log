@@ -1,0 +1,26 @@
+.popup {
+  width: 40vw;
+  padding: .5rem;
+}
+
+.popup img {
+  height: 200px;
+  width: -webkit-fill-available;
+  text-align: center;
+  margin: 0 auto;
+  display: block;
+}
+
+.edit-entry {
+  background-color: rgb(30 159 30);
+}
+
+.delete-entry {
+  background-color: rgb(208 25 71);
+}
+
+.edit-entry:hover,
+.delete-entry:hover {
+  transform: scale(0.98);
+  box-shadow: 3px 2px 22px 1px rgba(0, 0, 0, 0.24);
+}

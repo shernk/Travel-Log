@@ -10,6 +10,20 @@ body {
   overflow: hidden;
 }
 
+.button-entry {
+  margin: 5px 5px 0px 0px;
+  text-decoration: none;
+  border: none;
+  padding: 12px 40px;
+  font-size: 16px;
+  color: #fff;
+  border-radius: 5px;
+  box-shadow: 2px 3px 3px 2px rgba(0, 0, 0, 0.24);
+  cursor: pointer;
+  outline: none;
+  transition: 0.2s all;
+}
+
 .marker {
   transform: translate(-50%, -100%);
 }
@@ -18,27 +32,11 @@ body {
 .error {
   fill: #f05305;
 }
-.pin {
-  height: 100%;
-}
 
 .marker.yellow {
   fill: #f3b73e;
   height: 50px;
   width: 50px;
-}
-
-.popup {
-  width: 40vw;
-  padding: 1rem;
-}
-
-.popup img {
-  height: 200px;
-  width: -webkit-fill-available;
-  text-align: center;
-  margin: 0 auto;
-  display: block;
 }
 
 .entry-form label,
@@ -55,58 +53,8 @@ body {
   z-index: 9999;
 }
 
-.zoom-control {
-  width: 30px;
-  margin: 10px;
-}
-
-.geolocateStyle {
-  top: 0;
-  left: 0;
-  padding: "10px";
-  position: "absolute";
-}
-
-.fullscreenControlStyle {
-  top: 36;
-  left: 0;
-  padding: "10px";
-  position: "absolute";
-}
-
-.navStyle {
-  top: 72;
-  left: 0;
-  margin-top: 5px;
-  padding: "10px";
-  position: "absolute";
-}
-
-.scaleControlStyle {
-  bottom: 36;
-  left: 0;
-  padding: "10px";
-  position: "absolute";
-}
-
 h3 {
   margin-block-start: auto;
-}
-
-.control-panel {
-  font-family: "UberMove";
-  font-size: 15px;
-  line-height: 18px;
-  width: 230px;
-  background: #fff;
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.15);
-  margin: 10px;
-  padding: 15px 24px;
-  position: fixed;
-  top: 0;
-  right: 0;
-  outline: none;
-  cursor: auto;
 }
 
 .entry-form .button-entry {

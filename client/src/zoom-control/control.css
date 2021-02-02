@@ -1,0 +1,13 @@
+.zoom-control {
+  margin: 5px;
+  position: absolute;
+}
+
+.fullscreenControlStyle {
+  position: absolute;
+}
+
+.navStyle {
+  top: 72;
+  margin-top: 35px;
+}

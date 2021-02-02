@@ -3,13 +3,11 @@ import { useState, useEffect, useCallback } from "react";
 import ReactMapGL, {
   Marker,
   Popup,
-  NavigationControl,
-  FullscreenControl,
-  ScaleControl,
 } from "react-map-gl";
-import { listLogEntries } from "./fetch/API";
+import { listLogEntries, deleteLogEntry } from "./fetch/API";
 import LogEntryForm from "./enTry/logEntryForm";
 import ControlPanel from "./marker/control-panel";
+import ControlZoom from "./zoom-control/control";
 import Pin from "./marker/pin";
 
 const App = () => {
@@ -66,29 +64,25 @@ const App = () => {
     });
   };
   
-  const deleteMarker = async () => {
+  const deleteMarker = async (id) => {
     console.log("deleteMarker");
     const logEntries = await listLogEntries();
 
     // list of all markers
-    const id = logEntries.map((entry) => entry._id);
-    // console.log(id);
+    // const id = logEntries.map((entry) => entry._id);
+    console.log(id);
 
     // delete marker by id
-    logEntries.splice(
-      logEntries.findIndex((entry) => {
-        return entry._id === id;
-      }),
-      1
-    );
+    logEntries.filter((entry) => entry._id !== id);
     console.log(logEntries);
+
+    // save in listLogEntries
+    // deleteLogEntry(logEntries);
+
+    setLogEntries(logEntries);
 
     // reload all marker
     getEntries();
-
-    // save in listLogEntries
-
-    return logEntries;
   }
 
   return (
@@ -138,6 +132,15 @@ const App = () => {
                   Visited on: {new Date(entry.visitDate).toLocaleDateString()}
                 </small>
                 {entry.image && <img src={entry.image} alt={entry.title} />}
+                <div>
+                  <button className="edit-entry button-entry">Edit</button>
+                  <button
+                    onClick={() => deleteMarker(entry._id)}
+                    className="delete-entry button-entry"
+                  >
+                    Delete
+                  </button> 
+                </div>
               </div>
             </Popup>
           ) : null}
@@ -176,18 +179,9 @@ const App = () => {
         </>
       ) : null}
 
-      <ControlPanel lngLats={events} />
-
-      <div className="zoom-control">
-        <div className="fullscreenControlStyle">
-          <FullscreenControl />
-        </div>
-        <div className="navStyle">
-          <NavigationControl />
-        </div>
-        <div className="scaleControlStyle">
-          <ScaleControl />
-        </div>
+      <div className="control-zoom-panel">
+        <ControlPanel lngLats={events} />
+        <ControlZoom />
       </div>
     </ReactMapGL>
   );
