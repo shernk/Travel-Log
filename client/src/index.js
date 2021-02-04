@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import './zoom-control/control.css';
+import './zoom-control/controlZoom.css';
 import './marker/control-panel.css';
 import './popup/popup.css';
 import App from './App';

@@ -1,13 +1,10 @@
 import * as React from "react";
 import { useState, useEffect, useCallback } from "react";
-import ReactMapGL, {
-  Marker,
-  Popup,
-} from "react-map-gl";
-import { listLogEntries, deleteLogEntry } from "./fetch/API";
+import ReactMapGL, { Marker, Popup } from "react-map-gl";
+import { listLogEntries } from "./fetch/API";
 import LogEntryForm from "./enTry/logEntryForm";
 import ControlPanel from "./marker/control-panel";
-import ControlZoom from "./zoom-control/control";
+import ControlZoom from "./zoom-control/controlZoom";
 import Pin from "./marker/pin";
 
 const App = () => {
@@ -15,6 +12,7 @@ const App = () => {
   const [showPopUp, setShowPopUp] = useState({});
   const [addEntryLocation, setAddEntryLocation] = useState(null);
   const [events, setLogEvents] = useState({});
+  const [title, setGetTitle] = useState("");
   const [viewport, setViewport] = useState({
     width: "100vw",
     height: "100vh",
@@ -32,29 +30,28 @@ const App = () => {
   };
 
   // render to show all location was marked
-  useEffect(() => { getEntries() },[]);
-  
+  useEffect(() => {
+    getEntries();
+  }, []);
+
   const onMarkerDragStart = useCallback((event) => {
     setLogEvents((_event) => ({ ..._event, onDragStart: event.lngLat }));
   }, []);
-  
+
   const onMarkerDrag = useCallback((event) => {
-    setLogEvents((_event) =>  ({ ..._event, onDrag: event.lngLat }));
+    setLogEvents((_event) => ({ ..._event, onDrag: event.lngLat }));
   }, []);
-  
-  const onMarkerDragEnd = useCallback(
-    (event) => {
-      console.log("onDragEnd");
-      setLogEvents((_event) => ({ ..._event, onDragEnd: event.lngLat }));
 
-      // show logEntry form to create new marker
-      showAddMarkerPopUp(event);
+  const onMarkerDragEnd = useCallback((event) => {
+    console.log("onDragEnd");
+    setLogEvents((_event) => ({ ..._event, onDragEnd: event.lngLat }));
 
-      // delete marker was dragging
-      deleteMarker();
-    },
-    []
-  );
+    // show logEntry form to create new marker
+    showAddMarkerPopUp(event);
+
+    // delete marker was dragging
+    deleteMarker();
+  }, []);
 
   const showAddMarkerPopUp = (event) => {
     const [longitude, latitude] = event.lngLat;
@@ -63,18 +60,18 @@ const App = () => {
       latitude,
     });
   };
-  
+
   const deleteMarker = async (id) => {
     console.log("deleteMarker");
     const logEntries = await listLogEntries();
 
     // list of all markers
     // const id = logEntries.map((entry) => entry._id);
-    console.log(id);
+    // console.log(id);
 
     // delete marker by id
     logEntries.filter((entry) => entry._id !== id);
-    console.log(logEntries);
+    // console.log(logEntries);
 
     // save in listLogEntries
     // deleteLogEntry(logEntries);
@@ -83,7 +80,7 @@ const App = () => {
 
     // reload all marker
     getEntries();
-  }
+  };
 
   return (
     <ReactMapGL
@@ -107,7 +104,10 @@ const App = () => {
           >
             <div
               className="pin"
-              onClick={() => setShowPopUp({ [entry._id]: true })}
+              onClick={() => {
+                setShowPopUp({ [entry._id]: true });
+                setGetTitle(entry.title);
+              }}
             >
               <Pin />
             </div>
@@ -139,7 +139,7 @@ const App = () => {
                     className="delete-entry button-entry"
                   >
                     Delete
-                  </button> 
+                  </button>
                 </div>
               </div>
             </Popup>
@@ -180,7 +180,7 @@ const App = () => {
       ) : null}
 
       <div className="control-zoom-panel">
-        <ControlPanel lngLats={events} />
+        <ControlPanel lngLats={events} title={title} />
         <ControlZoom />
       </div>
     </ReactMapGL>

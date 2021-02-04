@@ -6,10 +6,11 @@ function round5(value) {
   return (Math.round(value * 1e5) / 1e5).toFixed(5);
 }
 
-const ControlPanel = ({lngLats}) => {
+const ControlPanel = ({lngLats, title}) => {
   return (
     <div className="control-panel">
-      <h3>Draggable Marker
+      <h3>Draggable Marker:
+        <span className="title">{title}</span>
       </h3>
       <div>
         {eventNames.map((eventName) => {

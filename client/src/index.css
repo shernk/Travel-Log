@@ -24,21 +24,6 @@ body {
   transition: 0.2s all;
 }
 
-.marker {
-  transform: translate(-50%, -100%);
-}
-
-.marker.red path,
-.error {
-  fill: #f05305;
-}
-
-.marker.yellow {
-  fill: #f3b73e;
-  height: 50px;
-  width: 50px;
-}
-
 .entry-form label,
 .entry-form input,
 .entry-form textarea,
@@ -69,6 +54,7 @@ h3 {
   cursor: pointer;
 }
 
-.entry-form .button-entry:hover {
+.entry-form .button-entry:active {
+  transform: scale(0.98);
   border-color: rgba(255, 255, 255, 1);
 }
