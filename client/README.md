@@ -1,6 +1,6 @@
 
-  * [] Delete location
   * [] Update location
+  * [x] Delete location
   * [x] onDragEnd & onDragStart & onDrag are works
   * [x] Take lngLat location and show logEntryForm to input new info when dragged end
   * [x] Show title when drag begin on control-panel: Draggable Maker: title

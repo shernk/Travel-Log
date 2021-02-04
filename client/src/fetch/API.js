@@ -17,20 +17,8 @@ export async function createLogEntry(entry) {
 }
 
 export async function deleteLogEntry(entryId) {
-  const response = await fetch(url + entryId, {
+  const response = await fetch(url + "/" + entryId, {
     method: "DELETE",
-  });
+  })
   return response.json();
 }
-
-// export async function deleteLogEntry(_id) {
-//   const response = await fetch(url + _id, {
-//     method: "DELETE",
-//   }).then(() => {
-//     fetch(url)
-//       .then((response) => response.json)
-//       .catch((e) => console.error(e));
-//   });
-
-//   return response.json;
-// }

@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useState, useEffect, useCallback } from "react";
 import ReactMapGL, { Marker, Popup } from "react-map-gl";
-import { listLogEntries } from "./fetch/API";
+import { listLogEntries, deleteLogEntry } from "./fetch/API";
 import LogEntryForm from "./enTry/logEntryForm";
 import ControlPanel from "./marker/control-panel";
 import ControlZoom from "./zoom-control/controlZoom";
@@ -18,7 +18,7 @@ const App = () => {
     height: "100vh",
     latitude: 47.608013,
     longitude: -122.335167,
-    zoom: 8,
+    zoom: 9,
   });
 
   // All location've already existed
@@ -43,14 +43,10 @@ const App = () => {
   }, []);
 
   const onMarkerDragEnd = useCallback((event) => {
-    console.log("onDragEnd");
     setLogEvents((_event) => ({ ..._event, onDragEnd: event.lngLat }));
 
     // show logEntry form to create new marker
     showAddMarkerPopUp(event);
-
-    // delete marker was dragging
-    deleteMarker();
   }, []);
 
   const showAddMarkerPopUp = (event) => {
@@ -62,23 +58,16 @@ const App = () => {
   };
 
   const deleteMarker = async (id) => {
-    console.log("deleteMarker");
     const logEntries = await listLogEntries();
 
-    // list of all markers
-    // const id = logEntries.map((entry) => entry._id);
-    // console.log(id);
+    // get logEntry by id
+    logEntries.filter((entry) => entry._id !== id)
 
-    // delete marker by id
-    logEntries.filter((entry) => entry._id !== id);
-    // console.log(logEntries);
+    // async with database
+    deleteLogEntry(id);
 
-    // save in listLogEntries
-    // deleteLogEntry(logEntries);
-
-    setLogEntries(logEntries);
-
-    // reload all marker
+    // reload marker to front-end
+    // async save to database
     getEntries();
   };
 
@@ -135,8 +124,8 @@ const App = () => {
                 <div>
                   <button className="edit-entry button-entry">Edit</button>
                   <button
-                    onClick={() => deleteMarker(entry._id)}
                     className="delete-entry button-entry"
+                    onClick={() => deleteMarker(entry._id)}
                   >
                     Delete
                   </button>
