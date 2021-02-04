@@ -1,11 +1,12 @@
 import * as React from "react";
 import { useState, useEffect, useCallback } from "react";
-import ReactMapGL, { Marker, Popup } from "react-map-gl";
+import ReactMapGL from "react-map-gl";
 import { listLogEntries, deleteLogEntry } from "./fetch/API";
-import LogEntryForm from "./enTry/logEntryForm";
 import ControlPanel from "./marker/control-panel";
 import ControlZoom from "./zoom-control/controlZoom";
-import Pin from "./marker/pin";
+import PopUpLogEntry from "./popup/popUp";
+import AddEntryLocation from "./enTry/addEntryLocation";
+import MarkerLogEntry from "./marker/marker";
 
 const App = () => {
   const [logEntry, setLogEntries] = useState([]);
@@ -61,7 +62,7 @@ const App = () => {
     const logEntries = await listLogEntries();
 
     // get logEntry by id
-    logEntries.filter((entry) => entry._id !== id)
+    logEntries.filter((entry) => entry._id !== id);
 
     // async with database
     deleteLogEntry(id);
@@ -81,91 +82,31 @@ const App = () => {
     >
       {logEntry.map((entry) => (
         <React.Fragment key={entry._id}>
-          <Marker
-            latitude={entry.latitude}
-            longitude={entry.longitude}
-            offsetTop={-20}
-            offsetLeft={-10}
-            draggable
-            onDragStart={onMarkerDragStart}
-            onDrag={onMarkerDrag}
-            onDragEnd={onMarkerDragEnd}
-          >
-            <div
-              className="pin"
-              onClick={() => {
-                setShowPopUp({ [entry._id]: true });
-                setGetTitle(entry.title);
-              }}
-            >
-              <Pin />
-            </div>
-          </Marker>
+          <MarkerLogEntry
+            entry={entry}
+            onMarkerDragStart={onMarkerDragStart}
+            onMarkerDrag={onMarkerDrag}
+            onMarkerDragEnd={onMarkerDragEnd}
+            setShowPopUp={setShowPopUp}
+            setGetTitle={setGetTitle}
+          />
 
           {showPopUp[entry._id] ? (
-            <Popup
-              latitude={entry.latitude}
-              longitude={entry.longitude}
-              closeButton={true}
-              closeOnClick={false}
-              dynamicPosition={true}
-              anchor="top"
-              onClose={() => setShowPopUp({})}
-            >
-              <div className="popup">
-                <h3>{entry.title}</h3>
-                <p>{entry.comments}</p>
-                <p htmlFor="latitude">Latitude: {entry.latitude}</p>
-                <p htmlFor="longitude">Longitude: {entry.longitude}</p>
-                <small>
-                  Visited on: {new Date(entry.visitDate).toLocaleDateString()}
-                </small>
-                {entry.image && <img src={entry.image} alt={entry.title} />}
-                <div>
-                  <button className="edit-entry button-entry">Edit</button>
-                  <button
-                    className="delete-entry button-entry"
-                    onClick={() => deleteMarker(entry._id)}
-                  >
-                    Delete
-                  </button>
-                </div>
-              </div>
-            </Popup>
+            <PopUpLogEntry
+              entry={entry}
+              setShowPopUp={setShowPopUp}
+              deleteMarker={deleteMarker}
+            />
           ) : null}
         </React.Fragment>
       ))}
 
       {addEntryLocation ? (
-        <>
-          <Marker
-            latitude={addEntryLocation.latitude}
-            longitude={addEntryLocation.longitude}
-            offsetTop={-20}
-            offsetLeft={-10}
-          >
-            <Pin />
-          </Marker>
-          <Popup
-            latitude={addEntryLocation.latitude}
-            longitude={addEntryLocation.longitude}
-            closeButton={true}
-            closeOnClick={false}
-            dynamicPosition={true}
-            anchor="top"
-            onClose={() => setAddEntryLocation(null)}
-          >
-            <div className="popup">
-              <LogEntryForm
-                location={addEntryLocation}
-                onClose={() => {
-                  setAddEntryLocation(null); // after created entry, hidden the form
-                  getEntries(); // next, reload location was marked
-                }}
-              />
-            </div>
-          </Popup>
-        </>
+        <AddEntryLocation
+          addEntryLocation={addEntryLocation}
+          setAddEntryLocation={setAddEntryLocation}
+          getEntries={getEntries}
+        />
       ) : null}
 
       <div className="control-zoom-panel">
