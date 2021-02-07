@@ -5,7 +5,7 @@ import { listLogEntries, deleteLogEntry } from "./fetch/API";
 import ControlPanel from "./marker/control-panel";
 import ControlZoom from "./zoom-control/controlZoom";
 import PopUpLogEntry from "./popup/popUp";
-import AddEntryLocation from "./enTry/addEntryLocation";
+import AddEntryLocation from "./entry/addEntryLocation";
 import MarkerLogEntry from "./marker/marker";
 
 const App = () => {
@@ -72,6 +72,7 @@ const App = () => {
     getEntries();
   };
 
+
   return (
     <ReactMapGL
       {...viewport}
@@ -110,7 +111,12 @@ const App = () => {
       ) : null}
 
       <div className="control-zoom-panel">
-        <ControlPanel lngLats={events} title={title} />
+        <ControlPanel
+          lngLats={events}
+          title={title}
+          viewport={setViewport}
+          entries={logEntry}
+        />
         <ControlZoom />
       </div>
     </ReactMapGL>
