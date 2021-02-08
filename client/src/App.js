@@ -1,7 +1,12 @@
 import * as React from "react";
-import { useState, useEffect, useCallback } from "react";
-import ReactMapGL from "react-map-gl";
+import { useRef, useState, useEffect, useCallback } from "react";
+import ReactMapGL, {Source, Layer} from "react-map-gl";
 import { listLogEntries, deleteLogEntry } from "./fetch/API";
+import {
+  clusterLayer,
+  clusterCountLayer,
+  unclusteredPointLayer,
+} from "./cluster/layer";
 import ControlPanel from "./marker/control-panel";
 import ControlZoom from "./zoom-control/controlZoom";
 import PopUpLogEntry from "./popup/popUp";
@@ -9,6 +14,7 @@ import AddEntryLocation from "./entry/addEntryLocation";
 import MarkerLogEntry from "./marker/marker";
 
 const App = () => {
+  const mapRef = useRef(null);
   const [logEntry, setLogEntries] = useState([]);
   const [showPopUp, setShowPopUp] = useState({});
   const [addEntryLocation, setAddEntryLocation] = useState(null);
@@ -20,8 +26,10 @@ const App = () => {
     latitude: 47.608013,
     longitude: -122.335167,
     zoom: 9,
+    bearing: 0,
+    pitch: 0,
   });
-
+  
   // All location've already existed
   const getEntries = async () => {
     const logEntries = await listLogEntries();
@@ -72,6 +80,31 @@ const App = () => {
     await getEntries();
   };
 
+  // Cluster
+  const onClick = (event) => {
+    try {
+      const feature = event.features[0];
+      const clusterId = feature.properties.cluster_id;
+
+      const mapboxSource = mapRef.current.getMap().getSource("earthquakes");
+
+      mapboxSource.getClusterExpansionZoom(clusterId, (err, zoom) => {
+        if (err) {
+          return;
+        }
+
+        setViewport({
+          // ...viewport,
+          longitude: feature.geometry.coordinates[0],
+          latitude: feature.geometry.coordinates[1],
+          zoom,
+          transitionDuration: 500,
+        });
+      });
+    } catch (error) {
+      console.log(error);
+    }    
+  }
 
   return (
     <ReactMapGL
@@ -80,7 +113,23 @@ const App = () => {
       mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}
       onViewportChange={setViewport}
       onDblClick={showAddMarkerPopUp}
+      interactiveLayerIds={[clusterLayer.id]}
+      onClick={onClick}
+      ref={mapRef}
     >
+      <Source
+        id="earthquakes"
+        type="geojson"
+        data="https://docs.mapbox.com/mapbox-gl-js/assets/earthquakes.geojson"
+        cluster={true}
+        clusterMaxZoom={14}
+        clusterRadius={50}
+      >
+        <Layer {...clusterLayer} />
+        <Layer {...clusterCountLayer} />
+        <Layer {...unclusteredPointLayer} />
+      </Source>
+
       {logEntry.map((entry) => (
         <React.Fragment key={entry._id}>
           <MarkerLogEntry
