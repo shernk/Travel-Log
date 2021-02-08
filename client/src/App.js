@@ -69,7 +69,7 @@ const App = () => {
 
     // reload marker to front-end
     // async save to database
-    getEntries();
+    await getEntries();
   };
 
 
