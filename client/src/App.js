@@ -1,5 +1,10 @@
 import * as React from "react";
-import { useRef, useState, useEffect, useCallback } from "react";
+import {
+  useRef,
+  useState,
+  useEffect,
+  useCallback,
+} from "react";
 import ReactMapGL, {Source, Layer} from "react-map-gl";
 import { listLogEntries, deleteLogEntry } from "./fetch/API";
 import {
@@ -12,6 +17,7 @@ import ControlZoom from "./zoom-control/controlZoom";
 import PopUpLogEntry from "./popup/popUp";
 import AddEntryLocation from "./entry/addEntryLocation";
 import MarkerLogEntry from "./marker/marker";
+import DrawPolygon from "./draw-polygon/draw";
 
 const App = () => {
   const mapRef = useRef(null);
@@ -80,8 +86,7 @@ const App = () => {
     await getEntries();
   };
 
-  // Cluster
-  const onClick = (event) => {
+  const OnClick = (event) => {
     try {
       const feature = event.features[0];
       const clusterId = feature.properties.cluster_id;
@@ -94,7 +99,7 @@ const App = () => {
         }
 
         setViewport({
-          // ...viewport,
+          ...viewport,
           longitude: feature.geometry.coordinates[0],
           latitude: feature.geometry.coordinates[1],
           zoom,
@@ -103,8 +108,8 @@ const App = () => {
       });
     } catch (error) {
       console.log(error);
-    }    
-  }
+    }
+  };
 
   return (
     <ReactMapGL
@@ -114,7 +119,7 @@ const App = () => {
       onViewportChange={setViewport}
       onDblClick={showAddMarkerPopUp}
       interactiveLayerIds={[clusterLayer.id]}
-      onClick={onClick}
+      onClick={OnClick}
       ref={mapRef}
     >
       <Source
@@ -168,6 +173,9 @@ const App = () => {
         />
         <ControlZoom />
       </div>
+
+      <DrawPolygon />
+
     </ReactMapGL>
   );
 };

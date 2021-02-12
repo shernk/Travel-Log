@@ -1,4 +1,5 @@
 
+  * [ ] Draw polygon & add meter
   * [] Update location
   * [x] Delete location
   * [x] onDragEnd & onDragStart & onDrag are works
