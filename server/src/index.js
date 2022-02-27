@@ -28,6 +28,9 @@ connection.once("open", () => {
 //   console.log('Unhandled Rejection at:', promise, 'reason:', reason);
 // });
 
+// deploy
+app.use(express.static("public"));
+
 // middle wares
 app.use(morgan('common'));
 app.use(helmet());
