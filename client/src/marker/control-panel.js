@@ -15,7 +15,7 @@ const ControlPanel = ({ lngLats, title, viewport, entries }) => {
         longitude,
         latitude,
         zoom: 9,
-        transitionInterpolator: new FlyToInterpolator({ speed: 1.2 }),
+        transitionInterpolator: new FlyToInterpolator({ speed: 2.0 }),
         transitionDuration: "auto",
       });
     },

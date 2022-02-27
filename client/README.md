@@ -1,27 +1,33 @@
+This project was bootstrapped with Create React App.
 
-  * [ ] Draw polygon & add meter
-  * [] Update location
-  * [x] Delete location
-  * [x] onDragEnd & onDragStart & onDrag are works
-  * [x] Take lngLat location and show logEntryForm to input new info when dragged end
-  * [x] Show title when drag begin on control-panel: Draggable Maker: title
+##Available Scripts
+---
+In the project directory, you can run:
 
-  /**
+### npm start
 
-  *! [] Hide its logEntryForm when dragged end
+Runs the app in the development mode.
 
-  */
-  
-  ### Come-up with an idea:
-  
-  *** Have 2 ways to create new logEntryForm
-  * [x] Create by double click on spot
-  * [] Drag marker to another location
+Open http://localhost:3000 to view it in the browser.
 
-  /** 
+The page will reload if you make edits.
 
-  *TODO: [] Hide logEntryForm of marker have already existed after dragged end
+You will also see any lint errors in the console.
 
-  *TODO: [] Create by drag marker already have exist on map which means its location have to delete after dragged marker to another location and will show new logEntry form simultaneouly
+### npm test
 
-  */ 
+Launches the test runner in the interactive watch mode.
+
+See the section about running tests for more information.
+
+### npm run build
+
+Builds the app for production to the build folder.
+
+It correctly bundles React in production mode and optimizes the build for the best performance.
+
+The build is minified and the filenames include the hashes.
+
+Your app is ready to be deployed!
+
+See the section about deployment for more information.
