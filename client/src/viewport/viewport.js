@@ -4,8 +4,7 @@ const ControlPanelViewPort = ({ onSelectCity, entries }) => {
   return (
     <>
       <div id="toggle" className="control-panel viewport">
-        <h3>The 
-          Location Marked</h3>
+        <h3>The Marked Locations</h3>
         <hr />
 
         {entries
