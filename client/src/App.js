@@ -1,11 +1,6 @@
 import * as React from "react";
-import {
-  useRef,
-  useState,
-  useEffect,
-  useCallback,
-} from "react";
-import ReactMapGL, {Source, Layer} from "react-map-gl";
+import { useRef, useState, useEffect, useCallback } from "react";
+import ReactMapGL, { Source, Layer } from "react-map-gl";
 import { listLogEntries, deleteLogEntry } from "./fetch/API";
 import {
   clusterLayer,
@@ -35,7 +30,7 @@ const App = () => {
     bearing: 0,
     pitch: 0,
   });
-  
+
   // All location've already existed
   const getEntries = async () => {
     const logEntries = await listLogEntries();
@@ -171,11 +166,11 @@ const App = () => {
           viewport={setViewport}
           entries={logEntry}
         />
+
         <ControlZoom />
+
+        <DrawPolygon />
       </div>
-
-      <DrawPolygon />
-
     </ReactMapGL>
   );
 };

@@ -42,8 +42,7 @@ h3 {
   margin-block-start: auto;
 }
 
-.entry-form .button-entry {
-  width: 410px;
+.entry-form .button-entry { 
   display: inline-block;
   padding: 0.3em 1.2em;
   margin: 0 0.1em 0.1em 0;

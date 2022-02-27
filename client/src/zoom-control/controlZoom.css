@@ -1,7 +1,5 @@
 .zoom-control {
-  top: 65px;
-  margin: 5px;
-  position: absolute;
+  float: left;
 }
 
 .fullscreenControlStyle {
@@ -11,4 +9,8 @@
 .navStyle {
   top: 72;
   margin-top: 35px;
+}
+
+.mapboxgl-ctrl-top-left{
+  display: none;
 }
