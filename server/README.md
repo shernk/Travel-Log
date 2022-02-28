@@ -1,1 +1,1 @@
-### Create your own mongodb to connect in env
+### Create your own mongodb uri to connect in env
