@@ -1,1 +1,1 @@
-### This app used mongoDB
+### Create your own mongodb to connect in env
