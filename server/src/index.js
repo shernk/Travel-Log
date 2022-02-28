@@ -46,6 +46,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Content-Type", "application/json");
+  res.header("Access-Control-Allow-Credentials", "true");
+  res.header("Access-Control-Allow-Headers", "*");
+  res.header("Access-Control-Allow-Methods", "*");
   next();
 });
 
@@ -66,6 +69,14 @@ app.use(middlewares.ErrorHandler);
 
 const port = process.env.PORT || 1337;
 
-app.listen(port, () => {
-  console.log(`Listening at http://localhost:${port}`);
+// app.listen(port, () => {
+//   console.log(`Listening at http://localhost:${port}`);
+// });
+
+app.listen(process.env.PORT || 3000, function () {
+  console.log(
+    "Express server listening on port %d in %s mode",
+    this.address().port,
+    app.settings.env
+  );
 });
