@@ -1,6 +1,7 @@
 /* eslint-disable */ 
 
 const { Router } = require('express');
+const { findById } = require('../src/models/logEntry');
 
 const LogEntry = require('../src/models/logEntry');
 

@@ -14,6 +14,14 @@ import AddEntryLocation from "./entry/addEntryLocation";
 import MarkerLogEntry from "./marker/marker";
 import DrawPolygon from "./draw-polygon/draw";
 
+import "mapbox-gl/dist/mapbox-gl.css";
+import mapboxgl from "mapbox-gl";
+// The following is required to stop "npm build" from transpiling mapbox code.
+// notice the exclamation point in the import.
+// @ts-ignore
+// eslint-disable-next-line import/no-webpack-loader-syntax, import/no-unresolved
+mapboxgl.workerClass = require("worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker").default;
+
 const App = () => {
   const mapRef = useRef(null);
   const [logEntry, setLogEntries] = useState([]);

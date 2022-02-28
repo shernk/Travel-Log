@@ -15,7 +15,7 @@ const ControlPanelViewPort = ({ onSelectCity, entries }) => {
                 type="radio"
                 name="city"
                 id={`city-${index}`}
-                defaultChecked={city.title === "Seattle"}
+                // defaultChecked={city.title === "Da Nang"}
                 onClick={() => onSelectCity(city)}
               />
               <label htmlFor={`city-${index}`}>{city.title}</label>

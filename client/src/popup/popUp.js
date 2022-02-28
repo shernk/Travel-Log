@@ -1,7 +1,6 @@
 import { Popup } from "react-map-gl";
 
-const PopUpLogEntry = ({entry, setShowPopUp, deleteMarker}) => {
-
+const PopUpLogEntry = ({ entry, setShowPopUp, deleteMarker }) => {
   return (
     <Popup
       latitude={entry.latitude}
@@ -22,7 +21,6 @@ const PopUpLogEntry = ({entry, setShowPopUp, deleteMarker}) => {
         </small>
         {entry.image && <img src={entry.image} alt={entry.title} />}
         <div>
-          <button className="edit-entry button-entry">Edit</button>
           <button
             className="delete-entry button-entry"
             onClick={() => deleteMarker(entry._id)}
@@ -35,4 +33,4 @@ const PopUpLogEntry = ({entry, setShowPopUp, deleteMarker}) => {
   );
 };
 
-export default PopUpLogEntry
+export default PopUpLogEntry;

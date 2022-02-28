@@ -30,4 +30,6 @@ The build is minified and the filenames include the hashes.
 
 Your app is ready to be deployed!
 
+### https://pin-location.herokuapp.com/
+
 See the section about deployment for more information.
