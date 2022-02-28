@@ -6,6 +6,7 @@ bin-release/
 
 # Other files and folders
 node_modules
+/pin-location
 .settings/
 
 # Executables
