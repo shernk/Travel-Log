@@ -177,7 +177,7 @@ const App = () => {
 
         <ControlZoom />
 
-        <DrawPolygon />
+        {/* <DrawPolygon /> */}
       </div>
     </ReactMapGL>
   );
