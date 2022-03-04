@@ -5,15 +5,13 @@ const morgan = require("morgan");
 const helmet = require("helmet");
 const cors = require("cors");
 const mongoose = require("mongoose");
-
+const bodyParser = require("body-parser");
 const dotenv = require("dotenv")
-dotenv.config();
-
 const middlewares = require("./middlewares");
 const routes = require("../api/routes");
 
 const app = express();
-const bodyParser = require("body-parser");
+dotenv.config();
 
 mongoose.connect(process.env.DATABASE_URL, {
   useNewUrlParser: true,
@@ -34,7 +32,7 @@ connection.once("open", () => {
 // deploy
 app.use(express.static("public"));
 
-// middle wares
+// middlewares
 app.use(morgan("common"));
 app.use(helmet());
 app.use(cors({ origin: process.env.CORS_ORIGIN }));
