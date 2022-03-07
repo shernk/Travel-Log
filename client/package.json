@@ -55,5 +55,6 @@
   ],
   "devDependencies": {
     "worker-loader": "^3.0.8"
-  }
+  },
+  "proxy": "http://localhost:1337/api/routes"
 }

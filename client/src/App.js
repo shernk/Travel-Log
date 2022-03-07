@@ -82,7 +82,7 @@ const App = () => {
     logEntries.filter((entry) => entry._id !== id);
 
     // async with database
-    deleteLogEntry(id);
+    await deleteLogEntry(id);
 
     // reload marker to front-end
     // async save to database
@@ -177,7 +177,7 @@ const App = () => {
 
         <ControlZoom />
 
-        {/* <DrawPolygon /> */}
+        <DrawPolygon />
       </div>
     </ReactMapGL>
   );

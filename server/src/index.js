@@ -6,7 +6,7 @@ const helmet = require("helmet");
 const cors = require("cors");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
-const dotenv = require("dotenv")
+const dotenv = require("dotenv");
 const middlewares = require("./middlewares");
 const routes = require("../api/routes");
 
@@ -30,7 +30,7 @@ connection.once("open", () => {
 // });
 
 // deploy
-app.use(express.static("public"));
+// app.use(express.static("public"));
 
 // middlewares
 app.use(morgan("common"));
